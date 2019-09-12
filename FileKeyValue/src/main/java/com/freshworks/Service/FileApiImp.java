@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 
 @Service
 public class FileApiImp implements FileApiInterface {
@@ -23,6 +24,7 @@ public class FileApiImp implements FileApiInterface {
 			File files = new File("Store");
 			if (!files.exists() && !files.isDirectory()) {
 				files.mkdirs();
+				
 				}
 			
 			FileWriter file = new FileWriter(files+"/"+ filename + ".json");
@@ -43,22 +45,23 @@ public class FileApiImp implements FileApiInterface {
 	}
 
 	@Override
-	public Map<?, ?> readJson(String filename) {
-
+	public JSONObject  readJson(String filename) {
+		JSONObject iswrite = new JSONObject();
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		Map<?, ?> map = null;
 		System.out.println("File Name is::" + filename);
 		try {
 			map = objectMapper.readValue(new FileInputStream("Store/" + filename + ".json"), Map.class);
+			iswrite.put("response", map);
 		} catch (IOException e) {
 			e.printStackTrace();
-			JSONObject iswrite = new JSONObject();
+			
 			iswrite.put("message", e.getMessage());
 			
 		}
 
-		return map;
+		return iswrite;
 	}
 
 	public boolean deleteDirectory(File path) {

@@ -53,8 +53,7 @@ public class FileApi {
 
 	@GetMapping(path = "/read/{keyname}")
 	public synchronized JSONObject Readfile(@PathVariable String keyname) throws JsonParseException, JsonMappingException, FileNotFoundException, IOException {
-		Map<?, ?> map = apiImp.readJson(keyname); // Read json using keyname
-		JSONObject jsobj =  new JSONObject(map);
+		JSONObject jsobj = apiImp.readJson(keyname); // Read json using keyname
 		return jsobj;
 	}
 

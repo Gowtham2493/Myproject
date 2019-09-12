@@ -11,5 +11,5 @@ public interface FileApiInterface {
 
 	public JSONObject writeJsonSimpleDemo(String filename,JSONObject jsobj);
 	
-	public Map<?, ?> readJson(String filename); 
+	public JSONObject readJson(String filename); 
 }
